@@ -52,9 +52,11 @@
 			<br/>
 			<span id="result"></span>
 		</div> 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/static/virtualjoystick.js"></script>
 		<script>
+			var socket = io.connect('http://192.168.1.6:5000');
 			objOrigin = {
 				"X": 0,
 				"Y": 0
@@ -91,19 +93,10 @@
 			setInterval(function() {
 				data = JSON.stringify(javascript_data, null, '\t');
 				if (origin != data ) {
+					socket.send(data)
 					
-				$.ajax({
-					type: 'POST',
-					url: "/postmethod",
-					data: data,
-					error: function(e) {
-						console.log(e);
-					},
-					dataType: "json",
-					contentType: "application/json"
-					});
 				}
-			},100)
+			},50)
 		</script>
 	</body>
 </html>
