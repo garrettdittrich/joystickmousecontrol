@@ -7,6 +7,8 @@ from time import sleep
 from threading import Thread
 from pymouse import PyMouse
 from flask_socketio import SocketIO, send
+import pyautogui
+import Xlib.threaded
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
@@ -65,7 +67,7 @@ def move_cursor(this_argument):
     if type(this_argument == tuple):
         m = PyMouse()
         new_pos = (m.position()[0] + this_argument[0],m.position()[1] + this_argument[1])
-        m.move(new_pos[0], new_pos[1])
+        pyautogui.moveTo(new_pos[0], new_pos[1])
 
 def inline_move_cursor(arg):
     thread = Thread(target=move_cursor, args=[arg])
