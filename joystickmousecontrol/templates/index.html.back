@@ -1,82 +1,17 @@
 <html>
   <body>
-      
-      <div id="top">
-      </div>
+     
       <div id="middle">
         <button id="leftbutton">  </button>
         <button id="midbutton">  </button>
         <button id="rightbutton">  </button>
       </div>
-      <div id="container">
-      </div>
   </body>
   
 </html>
-
-
-
+		
+		
 <style>
-
-
-#container {
-  height: 100%;
-}
-html {
-  background-color: grey;
-}
-#top {
-  width: 50px;
-  background-color: black;
-}
-
-#middle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #484848;
-}
-#midbutton {
-  flex: 1;
-  position: relative;
-  width: 60px;
-  height: 200px;
-  background-color: #121212;
-  border: none;
-  -webkit-box-shadow: -2px -1px 8px 3px rgba(0,0,0,0.21);
-  -moz-box-shadow: -2px -1px 8px 3px rgba(0,0,0,0.21);
-  box-shadow: -2px -1px 8px 3px rgba(0,0,0,0.21);
-  border-radius: 3px;
-  -webkit-clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-  padding: 0px 0px 0px 0px;
-  margin: 0px -32px 0px -32px;
-  
-}
-#midbutton:after {
-  content: ".............";
-  color: #6198e4;
-  font-size: 100px;
-  position: absolute;
-  top: -60px;
-  left: 19px
-}
-#leftbutton {
-  flex: 1;
-  position: relative;
-  width: 150px;
-  height: 200px;
-  background-color: #121212;
-  border: none;
-  -webkit-box-shadow: -2px -1px 8px 3px rgba(0,0,0,0.21);
-  -moz-box-shadow: -2px -1px 8px 3px rgba(0,0,0,0.21);
-  box-shadow: -2px -1px 8px 3px rgba(0,0,0,0.21);
-  border-radius: 3px;
-  -webkit-clip-path: polygon(0 2%, 80% 0%, 100% 100%, 0% 100%);
-  clip-path: polygon(0 2%, 82% 0%, 100% 100%, 0% 100%);
-  
-}
-
 #leftbutton:after {
   content:""; 
   background: #ff2a2a; 
@@ -125,15 +60,16 @@ html {
   transform: translateY(20px);
   box-shadow: 0 30px #666;
 }
-
-
+		
 </style>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/static/virtualjoystick.js"></script>
-<script>
+		 
+		
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="/static/virtualjoystick.js"></script>
+		<script>
 			
 				
 			var socket = io.connect('http://192.168.1.6:5000');
@@ -175,7 +111,14 @@ html {
 				console.log('up')
 			})
 			setInterval(function(){
-				
+				var outputEl	= document.getElementById('result');
+				outputEl.innerHTML	= '<b>Result:</b> '
+					+ ' dx:'+joystick.deltaX()
+					+ ' dy:'+joystick.deltaY()
+					+ (joystick.right()	? ' right'	: '')
+					+ (joystick.up()	? ' up'		: '')
+					+ (joystick.left()	? ' left'	: '')
+					+ (joystick.down()	? ' down' 	: '')
 				 javascript_data = {
     				X: joystick.deltaX(),
     				Y: joystick.deltaY()
@@ -189,4 +132,5 @@ html {
 					
 				}
 			},100)
-</script>
+		</script>
+
